@@ -1,0 +1,36 @@
+<% layout('layout/boilerplate') %>
+      <form action="/tattooShops" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input required type="text" class="form-control" id="title" name="tattooShop[title]" >
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <div class="mb-3">
+            <label for="title" class="form-label">Location</label>
+            <input required type="text" class="form-control" id="location" name="tattooShop[location]" >
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <div class="mb-3">
+            <label for="title" class="form-label">Description</label>
+            <textarea required class="form-control" id="description" name="tattooShop[description]" rows="3"></textarea>
+          <div class="valid-feedback">Looks good!</div>
+          </div>
+    
+
+          <div class="mb-3">
+            <div class="form-file custom-file">
+                <input type="file" class="form-file-input" id="image" name="image" multiple>
+                <label class="form-file-label" for="image">
+                    <span class="form-file-text custom-file-label">Choose image(s)...</span>
+                    <span class="form-file-button">Browse</span>
+                </label>
+            </div>
+        </div>
+    
+          <button type="submit" class="btn btn-primary mb-3">Submit Tattoo Shop</button>
+    </form>
+
+    <a class="btn btn-primary " href="/tattooShops" role="button">Back to Tattoo Shops</a>
+
+
