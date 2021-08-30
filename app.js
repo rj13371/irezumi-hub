@@ -20,8 +20,6 @@ const MongoStore = require('connect-mongo')
 const mongoDBURL = process.env.MONGODB_URI
 
 
-
-
 app.use(helmet());
 
 
@@ -80,7 +78,7 @@ const tattooShopsRoute = require('./routes/tattooShops')
 const reviewsRoute = require('./routes/reviews');
 const appointmentsRoute = require('./routes/appointments');
 
-const secret = process.env.SECRET || "squirrel'"
+const secret = process.env.SECRET || "squirrel"
 
 const store = MongoStore.create({
     mongoUrl: mongoDBURL,
