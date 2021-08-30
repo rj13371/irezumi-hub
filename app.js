@@ -20,6 +20,8 @@ const MongoStore = require('connect-mongo')
 const mongoDBURL = process.env.MONGODB_URI
 
 
+
+
 app.use(helmet());
 
 
@@ -83,7 +85,9 @@ const secret = process.env.SECRET || "squirrel"
 const store = MongoStore.create({
     mongoUrl: mongoDBURL,
     touchAfter: 24 * 60 * 60,
+    crypto: {
         secret: secret
+    }
 });
 
 store.on("error",  (e)=>{
