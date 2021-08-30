@@ -15,7 +15,10 @@ const passport = require('passport')
 const localStrategy = require('passport-local');
 const User = require('./models/user')
 const mongoSanitize = require('express-mongo-sanitize');
-const helmet = require('helmet')
+const helmet = require('helmet');
+const MongoStore = require('connect-mongo')
+const mongoDBURL = process.env.MONGODB_URI
+
 
 
 
@@ -77,9 +80,25 @@ const tattooShopsRoute = require('./routes/tattooShops')
 const reviewsRoute = require('./routes/reviews');
 const appointmentsRoute = require('./routes/appointments');
 
+const secret = process.env.SECRET || "squirrel'"
+
+const store = MongoStore.create({
+    mongoUrl: mongoDBURL,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: secret
+    }
+});
+
+store.on("error",  (e)=>{
+    console.log (e)
+})
+
+
 const sessionOptions = {
+    store,
     name:'session',
-    secret: 'hello', 
+    secret: secret, 
     resave: false,
     saveUninitialized: true, 
     cookie: {
@@ -102,7 +121,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-mongoose.connect('mongodb://localhost:27017/irezumi-hub', {
+
+mongoose.connect(mongoDBURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -161,6 +181,4 @@ app.use((err,req,res,next)=>{
     res.status(statusCode).render('tattooShops/error', {err});
 })
 
-app.listen(3000,()=>{
-    console.log ('listening')
-})
+app.listen(process.env.PORT || 3000);
