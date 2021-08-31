@@ -35,7 +35,8 @@
 
     <script>
         const mapToken = '<%-process.env.MAP_TOKEN%>'
-        const tattooShops = {features: JSON.parse('<%-JSON.stringify(tattooShops)%>')}
+        const tattooShopData = { features: <%-JSON.stringify(tattooShops)%>};
+        
     </script>
 
     <script src="/javascripts/clusterMap.js"></script>
